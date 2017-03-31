@@ -3,7 +3,101 @@ public class ArrayManip
 {
 	public static void main(String [] args)
 	{
-		testContainsAll();
+
+	}
+
+	public static int[] combineArrays(int [] setA, int [] setB)
+	{
+		int size = setA.length + setB.length; 
+		int [] combine = new int[size];
+		int ctr1 = 0;
+		int ctr2 = 0;
+		int ctr3 = 0;
+
+		while(ctr3<combine.length)
+		{
+			if(ctr1<setA.length)
+			{
+				combine[ctr1] = setA[ctr1];
+				ctr1++;
+			}
+
+			if(ctr3>=setA.length)
+			{
+				combine[ctr1] = setB[ctr2];
+				ctr1++;
+				ctr2++;
+			}
+			ctr3++;
+		}
+
+		return combine;
+	}
+
+
+	public static int[] commonElements(int[] listA, int[] listB)
+	{
+		listA = removeDuplicates(listA);
+		listB = removeDuplicates(listB);
+		int inter[] = new int[listA.length];
+		int i=0, j=0;
+
+		while(i<listA.length)
+		{
+			if(searchNum(listB,listA[i]) == true)
+			{
+				inter[j] = listA[i];
+				j++;
+			}
+			i++;
+		}
+		int [] inter1 = resizeArray(inter,j);
+
+		return inter1;
+	}
+
+	public static int[] resizeArray(int[] array, int size)
+	{
+		int resizedArray[] = new int[size];
+
+		for(int i=0; i<resizedArray.length; i++)
+		{
+			resizedArray[i] = array[i];
+		}
+		return resizedArray;
+	}
+
+	public static void testCommonElements()
+	{
+		Scanner input1 = new Scanner(System.in);
+		System.out.println("Enter size of  first array");
+		int array1[] = new int[input1.nextInt()];
+		
+		System.out.println("Enter number of ints required");
+		for(int i=0; i<array1.length; i++)
+		{
+			array1[i] = input1.nextInt();
+		}
+
+		Scanner input2 = new Scanner(System.in);
+		System.out.println("Enter size of  second array");
+		int array2[] = new int[input2.nextInt()];
+		
+		System.out.println("Enter number of ints required");
+		for(int i=0; i<array2.length; i++)
+		{
+			array2[i] = input2.nextInt();
+		}
+
+		int [] commonArray = commonElements(array1,array2);
+		if(commonArray.length == 0)
+			System.out.print("No common elements");
+		else
+		{
+			System.out.println("\nCommon Elements");
+			for(int i=0; i<commonArray.length; i++)
+				System.out.println(commonArray[i]);
+		}
 	}
 
 	public static boolean searchNum(int myArray[], int num)
@@ -94,7 +188,8 @@ public class ArrayManip
 
 				ctr1++;
 			}
-			return outArray;
+			int [] outArray1 = resizeArray(outArray,ctr2);
+			return outArray1;
 		}	
 	}
 
